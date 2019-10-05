@@ -1,4 +1,4 @@
-Feature: Obfuscate attributes in an object when calling to string
+Feature: Obfuscate attributes in an object when calling the toString method
 
   Scenario: As a user, I want to be able to obfuscate attributes in an object for masking sensitive information when logging
     Given: An object with fields marked by an annotation

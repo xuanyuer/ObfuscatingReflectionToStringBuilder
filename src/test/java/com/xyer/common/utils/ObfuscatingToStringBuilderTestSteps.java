@@ -6,7 +6,7 @@ import io.cucumber.java.en.When;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ObfuscatingToStringBuilderTestStepDefinitions
+public class ObfuscatingToStringBuilderTestSteps
 {
     private ObjectWithAnnotation objectWithAnnotation;
 

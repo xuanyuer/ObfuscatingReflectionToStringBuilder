@@ -5,11 +5,8 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith (Cucumber.class)
-@CucumberOptions
-(
-    features = "classpath:com/xyer/common/utils/obfuscatingToStringBuilder.feature"
-)
-public class ObfuscatingToStringBuilderTest
+@CucumberOptions (features = "classpath:com/xyer/common/utils/selectiveObfuscatingToStringBuilder.feature")
+public class SelectiveObfuscatingToStringBuilderTest
 {
 
 }
