@@ -1,10 +1,16 @@
 package com.xyer.common.utils;
 
 import com.xyer.common.annotations.ToStringObfuscate;
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 public class SelectiveObfuscatingToStringBuilder extends ReflectionToStringBuilder
 {
@@ -57,9 +63,28 @@ public class SelectiveObfuscatingToStringBuilder extends ReflectionToStringBuild
                 .toString ();
     }
 
+    public static String toStringExclude (final Object object, final Collection <String> excludeFieldNames)
+    {
+        return toStringExclude (object, toNoNullStringArray (excludeFieldNames));
+    }
+
     public static String toStringExclude (final Object object, final String... excludeFieldNames)
     {
-        return new SelectiveObfuscatingToStringBuilder (object).setExcludeFieldNames (excludeFieldNames).toString ();
+        return new ObfuscatingToStringBuilder (object).setExcludeFieldNames (excludeFieldNames).toString ();
+    }
+
+    static String [] toNoNullStringArray (final Collection <String> collection)
+    {
+        return collection == null
+               ? ArrayUtils.EMPTY_STRING_ARRAY
+               : toNoNullStringArray (collection.toArray ());
+    }
+
+    static String [] toNoNullStringArray (final Object [] array)
+    {
+        final List <String> list = new ArrayList <> ();
+        Arrays.stream (array).filter (Objects::nonNull).forEach (item -> list.add (item.toString ()));
+        return list.toArray (ArrayUtils.EMPTY_STRING_ARRAY);
     }
 
     public SelectiveObfuscatingToStringBuilder (final Object object)
